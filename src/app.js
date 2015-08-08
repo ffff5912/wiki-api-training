@@ -37,7 +37,6 @@ var App = React.createClass({
         };
     },
     componentDidMount: function() {
-        var self = this;
         this.setWiki();
     },
     setWiki: function() {
@@ -52,11 +51,12 @@ var App = React.createClass({
     searchWiki: function(keyword) {
         var self = this;
         WikiAction.Search(function(res) {
-        this.setState({
-            wiki: res,
-            ready: true
-        });
-    }, keyword)},
+            self.setState({
+                wiki: res,
+                ready: true
+            });
+        }, keyword)
+    },
     render: function() {
         return (
             <div>
