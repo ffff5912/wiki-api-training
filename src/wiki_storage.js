@@ -9,15 +9,6 @@ var Constraint = {
 
 var Query = {
     get: function(list) {
-        if ('random' === list) {
-            return {
-                format: "json",
-                action: "query",
-                list: list,
-                rnnamespace: Constraint.M_NAMESPACE,
-                rnlimit: Constraint.M_LIMIT
-            };
-        }
         if ('recentchanges' === list) {
             return {
                 format: "json",
@@ -27,6 +18,14 @@ var Query = {
                 rclimit: Constraint.M_LIMIT
             };
         }
+
+        return {
+            format: "json",
+            action: "query",
+            list: list,
+            rnnamespace: Constraint.M_NAMESPACE,
+            rnlimit: Constraint.M_LIMIT
+        };
     }
 };
 
