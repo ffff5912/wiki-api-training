@@ -14,9 +14,7 @@ var Header = React.createClass({
             <nav className="navbar navbar-inverse">
                 <div className="container">
                     <div className="navbar-header">
-                        <Link to="app" className="navbar-brand">
-                            <span onClick={this.onClick}>MediaWiki Sample</span>
-                        </Link>
+                        <Link to="app" className="navbar-brand" onClick={this.onClick}>MediaWiki Sample</Link>
                     </div>
                 </div>
             </nav>
