@@ -29,6 +29,39 @@ var WikiList = React.createClass({
     }
 });
 
+var SearchForm = React.createClass({
+    handleSubmit: function(e) {
+        e.preventDefault();
+        var keyword = React.findDOMNode(this.refs.keyword).value;
+        if (!keyword) {
+            return;
+        }
+        this.props.searchWiki(keyword);
+        return;
+    },
+    render: function() {
+        return (
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" ref="keyword" />
+                    <input type="submit" value="検索" />
+                </form>
+            </div>
+        );
+    }
+});
+
+var Wiki = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <SearchForm searchWiki={this.props.searchWiki}/>
+                <WikiList wiki={this.props.wiki}/>
+            </div>
+        );
+    }
+});
+
 var App = React.createClass({
     getInitialState: function() {
         return {
@@ -50,12 +83,12 @@ var App = React.createClass({
     },
     searchWiki: function(keyword) {
         var self = this;
-        WikiAction.Search(function(res) {
+        WikiAction.search(function(res) {
             self.setState({
                 wiki: res,
                 ready: true
             });
-        }, keyword)
+        }, keyword);
     },
     render: function() {
         return (
@@ -66,7 +99,7 @@ var App = React.createClass({
                 <div>
                     <Link to="wiki" onClick={this.setWiki}>wiki</Link>
                 </div>
-                <RouteHandler {...this.state}/>
+                <RouteHandler {...this.state} searchWiki={this.searchWiki}/>
             </div>
         );
     }
@@ -74,7 +107,7 @@ var App = React.createClass({
 
 var routes = (
     <Route handler={App} name="app" path="/">
-        <Route  handler={WikiList} name="wiki" path="wiki"/>
+        <Route handler={Wiki} name="wiki" path="wiki"/>
     </Route>
 );
 
