@@ -8,6 +8,8 @@ var RouteHandler = Router.RouteHandler;
 var WikiAction = require('./wiki_action.js');
 var Header = require('./header.js');
 var Wiki =require('./wiki.js');
+var WikiList = require('./wiki_list.js');
+var Main = require('./main.js');
 
 var App = React.createClass({
     getInitialState: function() {
@@ -17,16 +19,16 @@ var App = React.createClass({
         };
     },
     componentDidMount: function() {
-        this.setWiki();
+        this.setWiki('recentchanges');
     },
-    setWiki: function() {
+    setWiki: function(list) {
         var self = this;
         WikiAction.get(function(res) {
             self.setState({
                 wiki: res,
                 ready: true
             });
-        }, 'random');
+        }, list);
     },
     searchWiki: function(keyword) {
         var self = this;
@@ -40,10 +42,10 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <Header />
+                <Header onClick={this.onClick}/>
                 <div className="container">
-                    <Link onClick={this.setWiki} to="wiki">wiki</Link>
-                    <RouteHandler searchWiki={this.searchWiki} {...this.state}/>
+                    <Link to="wiki">wiki</Link>
+                    <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} {...this.state}/>
                 </div>
             </div>
         );
@@ -52,6 +54,7 @@ var App = React.createClass({
 
 var routes = (
     <Route handler={App} name="app" path="/">
+        <DefaultRoute handler={Main}/>
         <Route handler={Wiki} name="wiki" path="wiki"/>
     </Route>
 );
