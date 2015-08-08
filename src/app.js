@@ -42,7 +42,7 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <Header onClick={this.onClick}/>
+                <Header />
                 <div className="container">
                     <Link to="wiki">wiki</Link>
                     <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} {...this.state}/>
