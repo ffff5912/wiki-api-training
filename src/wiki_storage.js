@@ -7,23 +7,40 @@ var Constraint = {
     M_NAMESPACE: 0
 };
 
-var WikiStorage = {
-    findAll: function(callback, list) {
-        Request
-            .get(Constraint.API_URL)
-            .query({
+var Query = {
+    get: function(list) {
+        if ('random' === list) {
+            return {
                 format: "json",
                 action: "query",
                 list: list,
                 rnnamespace: Constraint.M_NAMESPACE,
                 rnlimit: Constraint.M_LIMIT
-            })
+            };
+        }
+        if ('recentchanges' === list) {
+            return {
+                format: "json",
+                action: "query",
+                list: list,
+                rcnamespace: 0,
+                rclimit: Constraint.M_LIMIT
+            };
+        }
+    }
+};
+
+var WikiStorage = {
+    findAll: function(callback, list) {
+        Request
+            .get(Constraint.API_URL)
+            .query(Query.get(list))
             .jsonp()
             .end(function(err, res) {
                 if (err) {
                     throw err;
                 }
-                callback(res.body.query.random);
+                callback(res.body.query[list]);
             });
     },
     findBy: function(callback, keyword) {
