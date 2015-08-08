@@ -6,11 +6,11 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var WikiAction = require('./wiki_action.js');
+var Header = require('./header.js');
 
 var Constraint = {
     WIKI_URL: 'https://ja.wikipedia.org/wiki/'
 }
-
 var WikiList = React.createClass({
     render: function() {
         var rows = this.props.wiki.map(function(value) {
@@ -43,8 +43,8 @@ var SearchForm = React.createClass({
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" ref="keyword" />
-                    <input type="submit" value="検索" />
+                    <input ref="keyword" type="text"/>
+                    <button type="submit" className="btn">検索</button>
                 </form>
             </div>
         );
@@ -93,13 +93,11 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <div>
-                    <Link to="app">HOME</Link>
+                <Header />
+                <div className="container">
+                    <Link onClick={this.setWiki} to="wiki">wiki</Link>
+                    <RouteHandler searchWiki={this.searchWiki} {...this.state}/>
                 </div>
-                <div>
-                    <Link to="wiki" onClick={this.setWiki}>wiki</Link>
-                </div>
-                <RouteHandler {...this.state} searchWiki={this.searchWiki}/>
             </div>
         );
     }
@@ -107,7 +105,7 @@ var App = React.createClass({
 
 var routes = (
     <Route handler={App} name="app" path="/">
-        <Route handler={Wiki} name="wiki" path="wiki"/>
+        <Route  handler={Wiki} name="wiki" path="wiki"/>
     </Route>
 );
 
