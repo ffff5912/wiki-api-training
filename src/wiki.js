@@ -16,12 +16,10 @@ var SearchForm = React.createClass({
     },
     render: function() {
         return (
-            <div>
                 <form onSubmit={this.handleSubmit}>
                     <input ref="keyword" type="text"/>
                     <button type="submit" className="btn">検索</button>
                 </form>
-            </div>
         );
     }
 });
@@ -29,7 +27,7 @@ var SearchForm = React.createClass({
 var Wiki = React.createClass({
     render: function() {
         return (
-            <div>
+            <div className="container">
                 <SearchForm searchWiki={this.props.searchWiki}/>
                 <WikiList wiki={this.props.wiki}/>
             </div>
