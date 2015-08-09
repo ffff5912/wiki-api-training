@@ -42,11 +42,11 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <Header />
+                <Header setWiki={this.setWiki}/>
                 <div className="container">
                     <Link to="wiki">wiki</Link>
-                    <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} {...this.state}/>
                 </div>
+                <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} {...this.state}/>
             </div>
         );
     }

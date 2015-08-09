@@ -3,11 +3,8 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 var Header = React.createClass({
-    propTypes: {
-        wikiList: 'recentchanges'
-    },
     onClick: function() {
-        this.props.setWiki(this.props.wikiList)
+        this.props.setWiki('recentchanges')
     },
     render: function() {
         return (
