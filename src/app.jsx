@@ -1,15 +1,9 @@
 var React = require('react');
 var Router = require('react-router');
-var NotFoundRoute = Router.NotFoundRoute;
-var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
-var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var WikiAction = require('./actions/wiki_action.js');
-var Header = require('./components/header.js');
-var Wiki =require('./components/wiki.js');
-var WikiList = require('./components/wiki_list.js');
-var Main = require('./components/main.js');
+var Header = require('./components/header.jsx');
 
 var App = React.createClass({
     getInitialState: function() {
@@ -52,13 +46,4 @@ var App = React.createClass({
     }
 });
 
-var routes = (
-    <Route handler={App} name="app" path="/">
-        <DefaultRoute handler={Main}/>
-        <Route handler={Wiki} name="wiki" path="wiki"/>
-    </Route>
-);
-
-Router.run(routes, Router.HashLocation, function(Handler) {
-    React.render(<Handler/>, document.getElementById('container'));
-});
+module.exports = App;
