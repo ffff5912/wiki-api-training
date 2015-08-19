@@ -10,7 +10,7 @@
     "gulp-webserver": "^0.9.1"
   },
   "scripts": {
-    "build": "browserify --debug --transform babelify src/app.jsx --outfile src/bundle.js"
+    "build": "browserify --debug --transform babelify src/routes.js --outfile src/bundle.js"
   },
   "license": "MIT",
   "dependencies": {
