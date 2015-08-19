@@ -1,4 +1,4 @@
-var WikiStorage = require('./wiki_storage.js');
+var WikiStorage = require('../stores/wiki_storage.js');
 
 var WikiAction = {
     get: function(callback, list) {

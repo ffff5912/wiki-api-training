@@ -5,11 +5,11 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
-var WikiAction = require('./wiki_action.js');
-var Header = require('./header.js');
-var Wiki =require('./wiki.js');
-var WikiList = require('./wiki_list.js');
-var Main = require('./main.js');
+var WikiAction = require('./actions/wiki_action.js');
+var Header = require('./components/header.js');
+var Wiki =require('./components/wiki.js');
+var WikiList = require('./components/wiki_list.js');
+var Main = require('./components/main.js');
 
 var App = React.createClass({
     getInitialState: function() {
