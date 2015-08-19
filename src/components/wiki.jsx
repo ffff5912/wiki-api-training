@@ -1,5 +1,5 @@
 var React = require('react');
-var WikiList = require('./wiki_list.js');
+var WikiList = require('./wiki_list.jsx');
 var Constraint = {
     WIKI_URL: 'https://ja.wikipedia.org/wiki/'
 }
