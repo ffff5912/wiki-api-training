@@ -8,21 +8,20 @@ var Constraint = {
 };
 
 var CategoryStorage = {
-    find: function(callback, id) {
+    findAll: function(callback, id) {
         Request
             .get(Constraint.API_URL)
             .query({
                 format: "json",
                 action: "query",
-                prop: "categories",
-                pageids: id
+                list: "allcategories",
             })
             .jsonp()
             .end(function(err, res) {
                 if (err) {
                     throw err;
                 }
-                callback(res.body.query.pages[id].categories);
+                callback(res.body.query.allcategories);
             });
     }
 };

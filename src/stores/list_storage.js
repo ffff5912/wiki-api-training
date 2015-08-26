@@ -58,23 +58,6 @@ var ListStorage = {
                 }
                 callback(res.body.query.search);
             });
-    },
-    findCategory: function(callback, id) {
-        Request
-            .get(Constraint.API_URL)
-            .query({
-                format: "json",
-                action: "query",
-                prop: "categories",
-                pageids: id
-            })
-            .jsonp()
-            .end(function(err, res) {
-                if (err) {
-                    throw err;
-                }
-                callback(res.body.query.pages[id].categories);
-            });
     }
 };
 
