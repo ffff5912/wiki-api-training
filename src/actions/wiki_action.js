@@ -1,18 +1,19 @@
-var WikiStorage = require('../stores/wiki_storage.js');
+var ListStorage = require('../stores/list_storage.js');
+var CategoryStorage = require('../stores/category_storage.js');
 
 var WikiAction = {
     get: function(callback, list) {
-        WikiStorage.findAll(function(res) {
+        ListStorage.findAll(function(res) {
             callback(res);
         }, list);
     },
     search: function(callback, keyword) {
-        WikiStorage.findBy(function(res) {
+        ListStorage.findBy(function(res) {
             callback(res);
         }, keyword)
     },
     getCategory: function(callback, keyword) {
-        WikiStorage.findCategory(function(res) {
+        CategoryStorage.find(function(res) {
             callback(res);
         }, keyword);
     },

@@ -1,5 +1,6 @@
 var React = require('react');
 var WikiAction = require('../actions/wiki_action.js');
+var CategoryList = require('./category_list.jsx');
 
 var Constraint = {
     WIKI_URL: 'https://ja.wikipedia.org/wiki/'
@@ -19,7 +20,9 @@ var WikiList = React.createClass({
             self.setCategory(value.pageid);
             var categories = self.categories.map(function(category) {
                 return (
-                    <span>{category.title}</span>
+                    <span>
+                        <CategoryList category={category}/>
+                    </span>
                 );
             });
             var link = Constraint.WIKI_URL + value.title;

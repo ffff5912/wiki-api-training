@@ -29,7 +29,7 @@ var Query = {
     }
 };
 
-var WikiStorage = {
+var ListStorage = {
     findAll: function(callback, list) {
         Request
             .get(Constraint.API_URL)
@@ -78,4 +78,4 @@ var WikiStorage = {
     }
 };
 
-module.exports = WikiStorage;
+module.exports = ListStorage;
