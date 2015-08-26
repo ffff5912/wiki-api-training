@@ -29,7 +29,7 @@ var Wiki = React.createClass({
         return (
             <div className="container">
                 <SearchForm searchWiki={this.props.searchWiki}/>
-                <WikiList wiki={this.props.wiki}/>
+                <WikiList wiki={this.props.wiki} categories={this.props.category}/>
             </div>
         );
     }

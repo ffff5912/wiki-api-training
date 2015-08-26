@@ -10,7 +10,12 @@ var WikiAction = {
         WikiStorage.findBy(function(res) {
             callback(res);
         }, keyword)
-    }
+    },
+    getCategory: function(callback, keyword) {
+        WikiStorage.findCategory(function(res) {
+            callback(res);
+        }, keyword);
+    },
 }
 
 module.exports = WikiAction;
