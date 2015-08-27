@@ -1,29 +1,22 @@
 var React = require('react');
-var WikiAction = require('../actions/wiki_action.js');
 
-var Constraint = {
-    WIKI_URL: 'https://ja.wikipedia.org/wiki/'
+var Constant = {
+    WIKI_URL: 'https://ja.wikipedia.org/wiki/Category'
 }
+
 var CategoryList = React.createClass({
-    categories: [],
-    setCategory: function(keyword) {
-        var self = this
-        WikiAction.getCategory(function(res) {
-            self.categories = res;
-        }, keyword);
-    },
     render: function() {
-        this.setCategory(this.props.pageid);
-        var categories = this.categories.map(function(category) {
+        var rows = this.props.category.map(function(value) {
+            var link = Constant.WIKI_URL + value['*'];
             return (
-                <span>
-                    {category.title}
-                </span>
+                <li>
+                    <a href={link} target="blank">{value['*']}</a>
+                </li>
             );
-        });
+        }.bind(this));
         return (
             <div>
-                {categories}
+                <ul>{rows}</ul>
             </div>
         );
     }

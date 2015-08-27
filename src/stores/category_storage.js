@@ -1,20 +1,20 @@
 var Request = require('superagent');
 require('superagent-jsonp')(Request);
 
-var Constraint = {
+var Constant = {
     API_URL: 'https://ja.wikipedia.org/w/api.php',
-    M_LIMIT: 10,
-    M_NAMESPACE: 0
 };
 
 var CategoryStorage = {
-    findAll: function(callback, id) {
+    find: function(callback, prefix) {
         Request
-            .get(Constraint.API_URL)
+            .get(Constant.API_URL)
             .query({
                 format: "json",
                 action: "query",
                 list: "allcategories",
+                acprefix: prefix,
+                acprop: "size"
             })
             .jsonp()
             .end(function(err, res) {

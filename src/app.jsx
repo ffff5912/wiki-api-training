@@ -3,12 +3,15 @@ var Router = require('react-router');
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var WikiAction = require('./actions/wiki_action.js');
+var CategoryStorage = require('./stores/category_storage.js');
 var Header = require('./components/header.jsx');
 
 var App = React.createClass({
     getInitialState: function() {
         return {
             wiki: [],
+            category: [],
+            prefix: 'wikipedia',
             ready: false
         };
     },
@@ -31,7 +34,17 @@ var App = React.createClass({
                 wiki: res,
                 ready: true
             });
+            self.setCategory(res.pageid);
         }, keyword);
+    },
+    setCategory: function(prefix) {
+        var self = this;
+        CategoryStorage.find(function(res) {
+            self.setState({category: res});
+        }, prefix);
+    },
+    handleOnClick: function() {
+        this.setCategory(this.state.prefix);
     },
     render: function() {
         return (
@@ -39,8 +52,9 @@ var App = React.createClass({
                 <Header setWiki={this.setWiki}/>
                 <div className="container">
                     <Link to="wiki">wiki</Link>
+                    <Link to="category" onClick={this.handleOnClick}>Category</Link>
                 </div>
-                <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} {...this.state}/>
+                <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} setCategory={this.setCategory} {...this.state}/>
             </div>
         );
     }
