@@ -1,7 +1,7 @@
 var Request = require('superagent');
 require('superagent-jsonp')(Request);
 
-var Constraint = {
+var Constant = {
     API_URL: 'https://ja.wikipedia.org/w/api.php',
     M_LIMIT: 10,
     M_NAMESPACE: 0
@@ -15,7 +15,7 @@ var Query = {
                 action: "query",
                 list: list,
                 rcnamespace: 0,
-                rclimit: Constraint.M_LIMIT
+                rclimit: Constant.M_LIMIT
             };
         }
 
@@ -23,8 +23,8 @@ var Query = {
             format: "json",
             action: "query",
             list: list,
-            rnnamespace: Constraint.M_NAMESPACE,
-            rnlimit: Constraint.M_LIMIT
+            rnnamespace: Constant.M_NAMESPACE,
+            rnlimit: Constant.M_LIMIT
         };
     }
 };
@@ -32,7 +32,7 @@ var Query = {
 var ListStorage = {
     findAll: function(callback, list) {
         Request
-            .get(Constraint.API_URL)
+            .get(Constant.API_URL)
             .query(Query.get(list))
             .jsonp()
             .end(function(err, res) {
@@ -44,7 +44,7 @@ var ListStorage = {
     },
     findBy: function(callback, keyword) {
         Request
-            .get(Constraint.API_URL)
+            .get(Constant.API_URL)
             .query({
                 format: "json",
                 action: "query",
