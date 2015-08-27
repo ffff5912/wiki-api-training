@@ -7,29 +7,12 @@ var Constraint = {
 }
 
 var WikiList = React.createClass({
-    categories: [],
-    setCategory: function(keyword) {
-        var self = this
-        WikiAction.getCategory(function(res) {
-            self.categories = res;
-        }, keyword);
-    },
     render: function() {
-        var self = this;
         var rows = this.props.wiki.map(function(value) {
-            self.setCategory(value.pageid);
-            var categories = self.categories.map(function(category) {
-                return (
-                    <span>
-                        <CategoryList category={category}/>
-                    </span>
-                );
-            });
             var link = Constraint.WIKI_URL + value.title;
             return (
                 <li>
                     <a href={link} target="blank">{value.title}</a>
-                    <p>{categories}</p>
                 </li>
             );
         }.bind(this));
