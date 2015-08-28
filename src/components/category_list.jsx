@@ -13,6 +13,9 @@ var CategoryList = React.createClass({
                 </li>
             );
         }.bind(this));
+        if (0 === rows.length) {
+            rows = 'not found category';
+        }
         return (
             <div>
                 <ul>{rows}</ul>
