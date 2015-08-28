@@ -11,12 +11,13 @@ var App = React.createClass({
         return {
             wiki: [],
             category: [],
-            prefix: 'wikipedia',
+            prefix: '',
             ready: false
         };
     },
     componentDidMount: function() {
         this.setWiki('recentchanges');
+        this.setCategory('wikipedia');
     },
     setWiki: function(list) {
         var self = this;
@@ -43,16 +44,13 @@ var App = React.createClass({
             self.setState({category: res});
         }, prefix);
     },
-    handleOnClick: function() {
-        this.setCategory(this.state.prefix);
-    },
     render: function() {
         return (
             <div>
                 <Header setWiki={this.setWiki}/>
                 <div className="container">
                     <Link to="wiki">wiki</Link>
-                    <Link to="category" onClick={this.handleOnClick}>Category</Link>
+                    <Link to="category">Category</Link>
                 </div>
                 <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} setCategory={this.setCategory} {...this.state}/>
             </div>
