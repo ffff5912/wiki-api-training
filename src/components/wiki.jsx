@@ -1,6 +1,6 @@
 var React = require('react');
 var WikiList = require('./wiki_list.jsx');
-var SearchForm = require('./SearchForm.jsx');
+var SearchForm = require('./search_form.jsx');
 
 var Wiki = React.createClass({
     handleSubmit: function (keyword) {
