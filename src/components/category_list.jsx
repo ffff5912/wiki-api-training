@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Constant = {
-    WIKI_URL: 'https://ja.wikipedia.org/wiki/Category'
+    WIKI_URL: 'https://ja.wikipedia.org/wiki/Category:'
 }
 var CategoryList = React.createClass({
     render: function() {
