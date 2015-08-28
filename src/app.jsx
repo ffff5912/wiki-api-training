@@ -17,7 +17,7 @@ var App = React.createClass({
     },
     componentDidMount: function() {
         this.setWiki('recentchanges');
-        this.setCategory('wikipedia');
+        this.setCategory(2015);
     },
     setWiki: function(list) {
         var self = this;
