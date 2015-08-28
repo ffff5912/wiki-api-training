@@ -1,11 +1,8 @@
 var React = require('react');
-var WikiAction = require('../actions/wiki_action.js');
-var CategoryList = require('./category_list.jsx');
 
 var Constant = {
     WIKI_URL: 'https://ja.wikipedia.org/wiki/'
 }
-
 var WikiList = React.createClass({
     render: function() {
         var rows = this.props.wiki.map(function(value) {
