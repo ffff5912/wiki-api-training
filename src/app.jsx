@@ -49,8 +49,8 @@ var App = React.createClass({
             <div>
                 <Header setWiki={this.setWiki}/>
                 <div className="container">
-                    <Link to="wiki">wiki</Link>
-                    <Link to="category">Category</Link>
+                    <Link to="wiki" className="col-md-1 btn btn-link">wiki</Link>
+                    <Link to="category" className="col-md-1 btn btn-link">Category</Link>
                 </div>
                 <RouteHandler setWiki={this.setWiki} searchWiki={this.searchWiki} setCategory={this.setCategory} {...this.state}/>
             </div>
