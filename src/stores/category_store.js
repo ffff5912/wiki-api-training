@@ -1,19 +1,26 @@
 var Request = require('superagent');
 require('superagent-jsonp')(Request);
+var Emitter = require('../event_emitter.js')
 
 var Constant = {
     API_URL: 'https://ja.wikipedia.org/w/api.php',
 };
 
-var CategoryStorage = {
-    find: function(callback, prefix) {
+var CategoryStore = (function(Emitter) {
+    function CategoryStore(dispatcher) {
+        Emitter.call(this);
+
+        dispatcher.on('search_category', this.find);
+    };
+
+    CategoryStore.prototype.find = function(data) {
         Request
             .get(Constant.API_URL)
             .query({
                 format: "json",
                 action: "query",
                 list: "allcategories",
-                acprefix: prefix,
+                acprefix: data.prefix,
                 acprop: "size"
             })
             .jsonp()
@@ -21,9 +28,11 @@ var CategoryStorage = {
                 if (err) {
                     throw err;
                 }
-                callback(res.body.query.allcategories);
+                data.callback(res.body.query.allcategories);
             });
     }
-};
 
-module.exports = CategoryStorage;
+    return CategoryStore;
+})(Emitter);
+
+module.exports = CategoryStore;

@@ -2,9 +2,10 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
-var WikiAction = require('./actions/wiki_action.js');
-var CategoryStorage = require('./stores/category_storage.js');
 var Header = require('./components/header.jsx');
+var Container = require('./container.js');
+var dispatcher = Container.get('dispatcher');
+var action = Container.get('action');
 
 var App = React.createClass({
     getInitialState: function() {
@@ -20,29 +21,19 @@ var App = React.createClass({
         this.setCategory(2015);
     },
     setWiki: function(list) {
-        var self = this;
-        WikiAction.get(function(res) {
-            self.setState({
-                wiki: res,
-                ready: true
-            });
-        }, list);
+        action.fetchWiki(this.onWikiChange, list);
     },
     searchWiki: function(keyword) {
-        var self = this;
-        WikiAction.search(function(res) {
-            self.setState({
-                wiki: res,
-                ready: true
-            });
-            self.setCategory(res.pageid);
-        }, keyword);
+        action.search(this.onWikiChange, keyword);
     },
     setCategory: function(prefix) {
-        var self = this;
-        CategoryStorage.find(function(res) {
-            self.setState({category: res});
-        }, prefix);
+        action.fetchCategory(this.onCategoryChange, prefix);
+    },
+    onWikiChange: function(wiki) {
+        this.setState({wiki: wiki})
+    },
+    onCategoryChange: function(category) {
+        this.setState({category: category})
     },
     render: function() {
         return (
