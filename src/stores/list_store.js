@@ -71,4 +71,4 @@ var ListStore = (function(Emitter) {
     return ListStore;
 })(Emitter);
 
-module.exports = ListStorage;
+module.exports = ListStore;
