@@ -10,7 +10,7 @@ gulp.task('browserify', function() {
     .bundle()
     .on("error", function (err) { console.log("Error : " + err.message); })
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./build/'))
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task('watch', function() {
