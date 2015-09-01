@@ -5,10 +5,10 @@ var ActionCreator = (function() {
         this.dispatcher = dispatcher;
     }
 
-    ActionCreator.prototype.fetchWiki = function(callback, list) {
-        var data = {callback: callback, list: list};
+    ActionCreator.prototype.fetchWiki = function(onWikiChange, list) {
+        var data = {callback: onWikiChange, list: list};
         this.dispatcher.emit('update', data);
-    }
+    };
 
     ActionCreator.prototype.search = function(onWikiChange, keyword) {
         var data = {callback: onWikiChange, keyword: keyword};
